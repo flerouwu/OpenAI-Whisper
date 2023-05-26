@@ -5,6 +5,7 @@ from pydub.silence import split_on_silence
 import numpy as np
 import config
 from scipy.io.wavfile import write as WAVWrite
+import os
 
 
 def record_audio(device_index: int = 0):
@@ -51,9 +52,9 @@ if __name__ == "__main__":
     print("Done recording.")
 
     # save recording
-    print("Saving recording...")
+    print("Saving recording...", end=" ")
     WAVWrite("recording.wav", config.sample_rate, recording)
-    print("Done saving recording.")
+    print("Done")
 
     # start transcribing
     print("Transcribing...")
@@ -69,9 +70,14 @@ if __name__ == "__main__":
     result = whisper.decode(model, mel, options)
     print("Done transcribing.")
 
+    # delete audio recording
+    print("Deleting recording...", end=" ")
+    os.remove("recording.wav")
+    print("Done")
+
     # print result
     if isinstance(result, list):
-        print("Multiply results found. One per line.")
+        print("Multiple results found. One per line.")
         for r in result:
             print(r.text)
     else:
