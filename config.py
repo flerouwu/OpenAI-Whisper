@@ -1,4 +1,4 @@
-# The device to record sound from. Run `python listDevices.py` to list devices and their indecies
+# The device to record sound from. Run `python listDevices.py` to list devices and their indicies
 # You should use the index of the device you want to record from.
 microphone_device = 1
 
