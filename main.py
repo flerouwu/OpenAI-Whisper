@@ -70,4 +70,9 @@ if __name__ == "__main__":
     print("Done transcribing.")
 
     # print result
-    print(f"Result: {result}")
+    if isinstance(result, list):
+        print("Multiply results found. One per line.")
+        for r in result:
+            print(r.text)
+    else:
+        print(result.text)
